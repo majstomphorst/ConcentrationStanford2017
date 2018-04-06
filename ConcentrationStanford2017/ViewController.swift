@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // end lesson one
     var flipCount = 0 {
         didSet {
             flipCountLabel.text = "flips: \(flipCount)"
