@@ -10,7 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    // end lesson one
+    // is an instance of the game 'concentration'
+    lazy var game = Concentration(numberOfPairsOfCards: cardButtons.count / 2 + 1)
+    
     var flipCount = 0 {
         didSet {
             flipCountLabel.text = "flips: \(flipCount)"
@@ -18,38 +20,56 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var flipCountLabel: UILabel!
-    // array of the buttons
     @IBOutlet var cardButtons: [UIButton]!
-    
-    var emojiChoices = ["👻","🎃","👻","🎃"]
     
     // if you touch a card
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
         // get the index of the button that is pressed/touched
         if let cardNumber = cardButtons.index(of: sender) {
-            flipCard(withEmoji: emojiChoices[cardNumber], on: sender)
+            game.choiceCards(at: cardNumber)
+            // now the ui can change we have to update the view from the model
+            updateViewFromModel()
+        } else {
+            print("choosen card was not in cardbuttons")
         }
     }
     
-    /*
-     "withEmoji" "on" = external name
-     "emoji" "button" = internal name
-     */
-    
-    
-    func flipCard(withEmoji emoji: String, on button: UIButton) {
-    
-        // if button == "👻" than change title and background color
-        if button.currentTitle == emoji {
-            button.setTitle("", for: .normal)
-            button.backgroundColor = #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)
-        } else { // if its not the ghost
-            button.setTitle(emoji, for: .normal)
-            button.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+    // match the model and the UI
+    func updateViewFromModel() {
+        // looking at every card on the UI
+        for index in cardButtons.indices {
+            
+            let button = cardButtons[index]
+            let card = game.cards[index]
+            
+            // check every card if its faceUp
+            if card.isFaceUp {
+                button.setTitle(emoji(for: card), for: .normal)
+                button.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+            } else {
+                button.setTitle("", for: .normal)
+                button.backgroundColor = card.isMatch ? #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0) : #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)
+            }
         }
-        
-        
+    }
+    
+    var emojiChoices = ["👻","🦇","👿","👺","👽","😼","😱","🤮","🤠"]
+    
+    var emoji = [Int:String]()
+    
+    func emoji(for card: Card) -> String {
+        // filling the dictonary on demand
+        if emoji[card.identifier] == nil, emojiChoices.count > 0 {
+            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count - 1)))
+            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
+        }
+        return emoji[card.identifier] ?? "?"
+//        if emoji[card.identifier] != nil {
+//            return emoji[card.identifier]!
+//        } else {
+//            return "?"
+//        }
     }
     
 }
