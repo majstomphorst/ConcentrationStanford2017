@@ -19,10 +19,10 @@ class Concentration {
     // the index of the card in the cards array
     func choiceCards(at index: Int) {
         
-        // 3 thing
-        // no cards are face up: Flipcard over
-        // 2 cards are face up: flip all cards facedown
-        // 1 card is faceUp: check for match
+//         3 thing
+//         no cards are face up: Flipcard over
+//         2 cards are face up: flip all cards facedown
+//         1 card is faceUp: check for match
         
         // ignore matched card (if not)
         if !cards[index].isMatch {
@@ -47,6 +47,12 @@ class Concentration {
         
     }
     
+    func shuffle(){
+        for _ in cards.indices {
+            cards.sort { (_,_) in arc4random() < arc4random() }
+        }
+    }
+    
     // the game has to start but the 'game'/Concentration has to know how many card the are in the game.
     init(numberOfPairsOfCards: Int) {
         for _ in 0..<numberOfPairsOfCards {
@@ -56,7 +62,6 @@ class Concentration {
             cards.append(card)
             cards.append(card)
         }
-        // TODO: shuffle the cards
-        
+        // shuffle()
     }
 }

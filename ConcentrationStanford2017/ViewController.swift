@@ -34,6 +34,13 @@ class ViewController: UIViewController {
             print("choosen card was not in cardbuttons")
         }
     }
+    // if press start new game
+    @IBAction func newGame(_ sender: UIButton) {
+        game = Concentration(numberOfPairsOfCards: cardButtons.count / 2 + 1)
+        flipCount = 0
+        renewEmojiChoices()
+        updateViewFromModel()
+    }
     
     // match the model and the UI
     func updateViewFromModel() {
@@ -54,7 +61,7 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiChoices = ["👻","🦇","👿","👺","👽","😼","😱","🤮","🤠"]
+    var emojiChoices = ["👻","🦇","👿","👺","👽","😼","😱","🤮","🤠","🤬","🚻"]
     
     var emoji = [Int:String]()
     
@@ -70,6 +77,9 @@ class ViewController: UIViewController {
 //        } else {
 //            return "?"
 //        }
+    }
+    func renewEmojiChoices() {
+        emojiChoices = ["👻","🦇","👿","👺","👽","😼","😱","🤮","🤠","🤬","🚻"]
     }
     
 }
