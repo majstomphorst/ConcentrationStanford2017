@@ -27,6 +27,12 @@ class ViewController: UIViewController {
             print("chosen card was not in cardButtons")
         }
     }
+    @IBAction func touchNewGame(_ sender: UIButton) {
+        emojiChoices = ["🦇", "😱", "🙀", "😈", "🎃", "👻", "🍭", "🍬", "🍎","🐨"]
+        game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        flipCount = 0
+        updateViewFromModel()
+    }
     
     func updateViewFromModel() {
         for index in cardButtons.indices {
@@ -42,7 +48,7 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiChoices = ["🦇", "😱", "🙀", "😈", "🎃", "👻", "🍭", "🍬", "🍎"]
+    var emojiChoices = ["🦇", "😱", "🙀", "😈", "🎃", "👻", "🍭", "🍬", "🍎","🐨"]
     var emoji = [Int:String]()
     
     func emoji(for card: Card) -> String {

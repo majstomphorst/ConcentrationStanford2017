@@ -30,7 +30,7 @@
                                                 <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hlR-FA-sOQ" userLabel="new game">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8J-lN-UCI" userLabel="new game">
                                                 <rect key="frame" x="201.5" y="0.0" width="157.5" height="67.5"/>
                                                 <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -38,7 +38,7 @@
                                                     <color key="titleColor" red="0.45009386540000001" green="0.98132258650000004" blue="0.4743030667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="newGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vQ7-8m-uzp"/>
+                                                    <action selector="touchNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3PV-Eo-cM2"/>
                                                 </connections>
                                             </button>
                                         </subviews>
