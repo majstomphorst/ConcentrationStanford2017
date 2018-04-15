@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		284ED2B620838E5D00BEDADE /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284ED2B520838E5D00BEDADE /* Theme.swift */; };
 		28B4703C2077F6E80047419B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4703B2077F6E80047419B /* AppDelegate.swift */; };
 		28B4703E2077F6E80047419B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4703D2077F6E80047419B /* ViewController.swift */; };
 		28B470412077F6E80047419B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B4703F2077F6E80047419B /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		284ED2B520838E5D00BEDADE /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		28B470382077F6E80047419B /* ConcentrationStanford2017.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConcentrationStanford2017.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28B4703B2077F6E80047419B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28B4703D2077F6E80047419B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				28B4703D2077F6E80047419B /* ViewController.swift */,
 				28DF6D66207E7D870054EC72 /* Concentration.swift */,
 				28DF6D68207E7ED10054EC72 /* Card.swift */,
+				284ED2B520838E5D00BEDADE /* Theme.swift */,
 				28B470472077F6E90047419B /* Info.plist */,
 			);
 			path = ConcentrationStanford2017;
@@ -151,6 +154,7 @@
 			files = (
 				28B4703E2077F6E80047419B /* ViewController.swift in Sources */,
 				28B4703C2077F6E80047419B /* AppDelegate.swift in Sources */,
+				284ED2B620838E5D00BEDADE /* Theme.swift in Sources */,
 				28DF6D67207E7D870054EC72 /* Concentration.swift in Sources */,
 				28DF6D69207E7ED10054EC72 /* Card.swift in Sources */,
 			);
