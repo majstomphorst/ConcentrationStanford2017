@@ -10,9 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // creating the game with the number of buttons on the board
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
     
     var flipCount = 0 { didSet { flipCountLabel.text = "Flips: \(flipCount)" } }
+    
+    override func viewDidLoad() {
+        indexTheme = Int(arc4random_uniform(UInt32(themeList.count)))
+        emojiChoices = themeList[indexTheme].emojis
+        print(themeList[indexTheme].name)
+    }
     
     @IBOutlet weak var flipCountLabel: UILabel!
     @IBOutlet var cardButtons: [UIButton]!
@@ -31,7 +38,6 @@ class ViewController: UIViewController {
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
         indexTheme = Int(arc4random_uniform(UInt32(themeList.count)))
         emojiChoices = themeList[indexTheme].emojis
-        print(themeList[indexTheme].name)
         flipCount = 0
         updateViewFromModel()
     }
@@ -60,9 +66,10 @@ class ViewController: UIViewController {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
             emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
         }
-        
         return emoji[card.identifier] ?? "?"
     }
+    
+    private var indexTheme = 0
     
     var themeList: [Theme] = [
         Theme(name: "animals",
@@ -74,17 +81,5 @@ class ViewController: UIViewController {
         Theme(name: "halloween",
               emojis: ["💀", "👻", "👽", "🙀", "🦇", "🕷", "🕸", "🎃", "🎭","😈", "⚰"])
     ]
-    
-    private var indexTheme = 0 {
-        didSet {
-            
-        }
-    }
-    
-    override func viewDidLoad() {
-        indexTheme = Int(arc4random_uniform(UInt32(themeList.count)))
-        emojiChoices = themeList[indexTheme].emojis
-        print(themeList[indexTheme].name)
-    }
 }
 
