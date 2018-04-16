@@ -14,13 +14,14 @@ class ViewController: UIViewController {
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
     
     var flipCount = 0 { didSet { flipCountLabel.text = "Flips: \(flipCount)" } }
+    var gameScore = 0 { didSet { gameScoreLabel.text = "Score: \(gameScore)" } }
     
     override func viewDidLoad() {
         indexTheme = Int(arc4random_uniform(UInt32(themeList.count)))
         emojiChoices = themeList[indexTheme].emojis
-        print(themeList[indexTheme].name)
     }
     
+    @IBOutlet weak var gameScoreLabel: UILabel!
     @IBOutlet weak var flipCountLabel: UILabel!
     @IBOutlet var cardButtons: [UIButton]!
     
@@ -54,6 +55,7 @@ class ViewController: UIViewController {
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 0) : #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)
             }
         }
+        // TODO sync flip count
     }
     
     var emojiChoices = [String]()
