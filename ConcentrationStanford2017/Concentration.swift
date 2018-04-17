@@ -10,8 +10,28 @@ import Foundation
 
 class Concentration {
     
-    var cards = [Card]()
-    var indexOfOneAndOnlyFaceUpCard: Int?
+    private(set) var cards = [Card]()
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
+        get {
+            var foundIndex: Int?
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    if foundIndex == nil {
+                        foundIndex = index
+                    } else {
+                        return nil
+                    }
+                }
+            }
+            return foundIndex
+        }
+        set(newValue) {
+            for index in cards.indices {
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
+    }
+    
     var flipCount = 0
     var gameScore = 0 {
         didSet {
@@ -20,6 +40,9 @@ class Concentration {
     }
     
     func chooseCard(at index: Int) {
+        
+        assert(cards.indices.contains(index),
+               "Concentration.chooseCard{at\(index): index not in cards")
         
         trackGameCount(cardIdentifier: cards[index].identifier)
         
@@ -35,13 +58,8 @@ class Concentration {
                     gameScore += 2
                 }
                 cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
             } else {
                 // either no cards or 2 cards are face up
-                for flipDownIndex in cards.indices {
-                    cards[flipDownIndex].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = index
             }
         }
@@ -53,6 +71,10 @@ class Concentration {
     }
     
     init(numberOfPairsOfCards: Int) {
+        
+//        assert(cards.indices.contains(numberOfPairsOfCards),
+//               "Concentration.init numberOfPairsOfCards\(numberOfPairsOfCards): 1 and up")
+//        
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]
@@ -62,8 +84,7 @@ class Concentration {
         var shuffled = [Card]()
         
         for _ in 1...cards.count {
-            let randomIndex = Int(arc4random_uniform(UInt32(cards.count)))
-            shuffled.append(cards.remove(at: randomIndex))
+            shuffled.append(cards.remove(at: cards.count.arc4random))
         }
         cards = shuffled
         
