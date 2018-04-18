@@ -32,24 +32,19 @@ class Concentration {
         }
     }
     
-    var flipCount = 0
-    var gameScore = 0 {
-        didSet {
-            print(gameScore)
-        }
-    }
+    private(set) var flipCount = 0
+    private(set) var gameScore = 0
     
     func chooseCard(at index: Int) {
         
         assert(cards.indices.contains(index),
                "Concentration.chooseCard{at\(index): index not in cards")
-        
-        trackGameCount(cardIdentifier: cards[index].identifier)
-        
+        flipCount += 1
         if !cards[index].isMatched {
             // 1. no cards are face up
             // 2. two cards are face up (either match or not)
             // 3. one card face up and chose some other card
+            
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 // check if cards match
                 if cards[matchIndex].identifier == cards[index].identifier {
@@ -57,17 +52,26 @@ class Concentration {
                     cards[index].isMatched = true
                     gameScore += 2
                 }
+                if cards[index].hasBeenFlipAtLeastOnce, !cards[index].isMatched {
+                    gameScore -= 1
+                }
+                
                 cards[index].isFaceUp = true
+                cards[index].hasBeenFlipAtLeastOnce = true
+                
+                
             } else {
                 // either no cards or 2 cards are face up
                 indexOfOneAndOnlyFaceUpCard = index
+                if cards[index].hasBeenFlipAtLeastOnce {
+                    gameScore -= 1
+                    
+                cards[index].hasBeenFlipAtLeastOnce = true
+                } else {
+                    cards[index].hasBeenFlipAtLeastOnce = true
+                }
             }
         }
-    }
-    
-    
-    private func trackGameCount(cardIdentifier: Int) {
-        
     }
     
     init(numberOfPairsOfCards: Int) {
