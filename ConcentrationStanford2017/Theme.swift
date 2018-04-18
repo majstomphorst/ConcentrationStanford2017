@@ -7,8 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 struct Theme {
     var name: String
     var emojis: [String]
+    var backgroundColor: UIColor
+    var cardBackgroundColor: UIColor
 }

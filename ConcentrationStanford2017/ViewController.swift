@@ -13,20 +13,23 @@ class ViewController: UIViewController {
     // creating the game with the number of buttons on the board
     lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
     
-    var numberOfPairsOfCards: Int {
-        return (cardButtons.count + 1) / 2
-    }
+    var numberOfPairsOfCards: Int { return (cardButtons.count + 1) / 2 }
     var flipCount = 0 { didSet { flipCountLabel.text = "Flips: \(flipCount)" } }
     var gameScore = 0 { didSet { gameScoreLabel.text = "Score: \(gameScore)" } }
     
     override func viewDidLoad() {
         indexTheme = Int(arc4random_uniform(UInt32(themeList.count)))
         emojiChoices = themeList[indexTheme].emojis
+        view.backgroundColor = themeList[indexTheme].backgroundColor
+        for cardButton in cardButtons {
+            cardButton.backgroundColor = themeList[indexTheme].cardBackgroundColor
+        }
     }
     
     @IBOutlet weak var gameScoreLabel: UILabel!
     @IBOutlet weak var flipCountLabel: UILabel!
     @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet var backGround: UIView!
     
     @IBAction func touchCard(_ sender: UIButton) {
         if let cardNumber = cardButtons.index(of: sender) {
@@ -41,6 +44,10 @@ class ViewController: UIViewController {
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
         indexTheme = Int(arc4random_uniform(UInt32(themeList.count)))
         emojiChoices = themeList[indexTheme].emojis
+        view.backgroundColor = themeList[indexTheme].backgroundColor
+        for cardButton in cardButtons {
+            cardButton.backgroundColor = themeList[indexTheme].cardBackgroundColor
+        }
         updateViewFromModel()
     }
     
@@ -56,13 +63,11 @@ class ViewController: UIViewController {
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 0) : #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)
             }
         }
-        // TODO sync flip count
         flipCount = game.flipCount
         gameScore = game.gameScore
     }
     
     var emojiChoices = [String]()
-
     var emoji = [Int:String]()
     
     func emoji(for card: Card) -> String {
@@ -76,13 +81,21 @@ class ViewController: UIViewController {
     
     var themeList: [Theme] = [
         Theme(name: "animals",
-              emojis: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🙊", "🐔","🐧"]),
+              emojis: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🙊", "🐔","🐧"],
+              backgroundColor: UIColor.green,
+              cardBackgroundColor: UIColor.blue),
         Theme(name: "face",
-              emojis: ["😀", "😁", "😆", "🤣", "😇", "🤪", "😎", "🤓", "🤩","🤯"]),
+              emojis: ["😀", "😁", "😆", "🤣", "😇", "🤪", "😎", "🤓", "🤩","🤯"],
+              backgroundColor: UIColor.yellow,
+              cardBackgroundColor: UIColor.black),
         Theme(name: "clothes",
-              emojis: ["👚", "👕", "👖", "👔", "👗", "👓", "👠", "🎩", "👟", "⛱","🎽"]),
+              emojis: ["👚", "👕", "👖", "👔", "👗", "👓", "👠", "🎩", "👟", "⛱","🎽"],
+              backgroundColor: UIColor.blue,
+              cardBackgroundColor: UIColor.yellow),
         Theme(name: "halloween",
-              emojis: ["💀", "👻", "👽", "🙀", "🦇", "🕷", "🕸", "🎃", "🎭","😈", "⚰"])
+              emojis: ["💀", "👻", "👽", "🙀", "🦇", "🕷", "🕸", "🎃", "🎭","😈", "⚰"],
+              backgroundColor: UIColor.black,
+              cardBackgroundColor: UIColor.orange)
     ]
 }
 
