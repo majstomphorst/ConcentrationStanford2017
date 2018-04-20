@@ -52,23 +52,23 @@ class Concentration {
                     cards[index].isMatched = true
                     gameScore += 2
                 }
-                if cards[index].hasBeenFlipAtLeastOnce, !cards[index].isMatched {
+                if cards[index].hasBeenFlip, !cards[index].isMatched {
                     gameScore -= 1
                 }
                 
                 cards[index].isFaceUp = true
-                cards[index].hasBeenFlipAtLeastOnce = true
+                cards[index].hasBeenFlip = true
                 
                 
             } else {
                 // either no cards or 2 cards are face up
                 indexOfOneAndOnlyFaceUpCard = index
-                if cards[index].hasBeenFlipAtLeastOnce {
+                if cards[index].hasBeenFlip {
                     gameScore -= 1
                     
-                cards[index].hasBeenFlipAtLeastOnce = true
+                cards[index].hasBeenFlip = true
                 } else {
-                    cards[index].hasBeenFlipAtLeastOnce = true
+                    cards[index].hasBeenFlip = true
                 }
             }
         }

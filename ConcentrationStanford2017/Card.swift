@@ -18,7 +18,7 @@ struct Card: Hashable {
     
     var isFaceUp = false
     var isMatched = false
-    var hasBeenFlipAtLeastOnce = false
+    var hasBeenFlip = false
     private var identifier: Int
     
     static var identifierFactory = 0
